@@ -13,5 +13,5 @@ message AppResponse {
 }
 
 service AppService {
-  rpc hello(AppRequest) returns (AppResponse);
+  rpc hello(AppRequest) returns (stream AppResponse);
 }

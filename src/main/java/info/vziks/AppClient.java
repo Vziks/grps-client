@@ -6,6 +6,7 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -37,8 +38,11 @@ public class AppClient {
         for (String name : arrNames) {
             AppServiceGrpc.AppServiceBlockingStub stub = AppServiceGrpc.newBlockingStub(channel);
             AppServiceOuterClass.AppRequest request = AppServiceOuterClass.AppRequest.newBuilder().setName(name).addAllArr(list).build();
-            AppServiceOuterClass.AppResponse response = stub.hello(request);
-            System.out.println(response);
+            Iterator<AppServiceOuterClass.AppResponse> response = stub.hello(request);
+
+            while (response.hasNext()) {
+                System.out.println(response.next());
+            }
         }
         channel.shutdownNow();
     }
