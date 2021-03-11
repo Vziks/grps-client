@@ -9,6 +9,7 @@ message AppRequest{
 
 message AppResponse {
   string hello = 1;
+  repeated string arr = 2;
 }
 
 service AppService {
