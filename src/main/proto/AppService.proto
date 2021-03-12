@@ -1,16 +1,11 @@
 syntax = "proto3";
 
+option java_multiple_files = true;
+option java_package = "info.vziks.grpc";
+
 package info.vziks.grpc;
 
-message AppRequest{
-  string name = 1;
-  repeated string arr = 2;
-}
-
-message AppResponse {
-  string hello = 1;
-  repeated string arr = 2;
-}
+import "app.proto";
 
 service AppService {
   rpc hello(AppRequest) returns (stream AppResponse);

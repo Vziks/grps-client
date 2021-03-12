@@ -1,7 +1,8 @@
 package info.vziks;
 
+import info.vziks.grpc.AppRequest;
+import info.vziks.grpc.AppResponse;
 import info.vziks.grpc.AppServiceGrpc;
-import info.vziks.grpc.AppServiceOuterClass;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -37,8 +38,8 @@ public class AppClient {
 
         for (String name : arrNames) {
             AppServiceGrpc.AppServiceBlockingStub stub = AppServiceGrpc.newBlockingStub(channel);
-            AppServiceOuterClass.AppRequest request = AppServiceOuterClass.AppRequest.newBuilder().setName(name).addAllArr(list).build();
-            Iterator<AppServiceOuterClass.AppResponse> response = stub.hello(request);
+            AppRequest request = AppRequest.newBuilder().setName(name).addAllArr(list).build();
+            Iterator<AppResponse> response = stub.hello(request);
 
             while (response.hasNext()) {
                 System.out.println(response.next());
@@ -46,4 +47,6 @@ public class AppClient {
         }
         channel.shutdownNow();
     }
+
+
 }
